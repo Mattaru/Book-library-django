@@ -1,8 +1,28 @@
-#### The link to Heroku - https://desolate-ravine-50362.herokuapp.com/
+##### Для начала работы локально:
+1. Копируйте ссылку репозитория с GitHub или же просто копируйти эту ссылку https://github.com/Mattaru/Book-library-django.git
+1. Откройте командную строку и перейдите в папку, в которой хотите разместить проект `>>> cd path`
+1. В командной строке введите `>>> git clone https://github.com/Mattaru/Book-library-django.git`
+1. Перейдите в папку созданного репозитория `>>> cd Book-library-django`
+1. Создайте вертуальную среду для Python. Для этого введите команду `>>> python -m venv путь до папки с проектом включительно/название вертуальной среды`
+Пример полной команды: `>>> python -m venv C:/MyFolder/Book-library-django/env`
+1. Теперь активируйте виртуальную среду `C:/MyFolder/Book-library-django> env\Scripts\activate`
+1. Установите все модули совместимостей, для этого введите команду `>>> pip install -r requirements.txt` 
+1. После того, как все совместимости установлены, перейдите в папку my_site `>>> cd my_site`
+
+
 ##### For local start:
 ###### >>> git clon -rep-
 ###### >>> cd rep/path
 ###### >>> python -m venv -dir-
 ###### >>> -venv-dir\Scripts\activate
 ###### >>> pip install -r requirements.txt
+###### Create in my_site/ directory the folder with name "databases"
+###### >>> cd my_site
+###### >>> python manage.py migrate
+###### >>> python manage.py loaddata data.json
 ###### >>> python manage.py runserver
+###### Now you can go to on one of urls:
+###### http://127.0.0.1:8000/book/
+###### http://127.0.0.1:8000/author/
+###### http://127.0.0.1:8000/friend/
+###### http://127.0.0.1:8000/publisher/
