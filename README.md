@@ -20,18 +20,18 @@
 
 
 ##### For local start:
-###### >>> git clon -rep-
-###### >>> cd rep/path
-###### >>> python -m venv -dir-
-###### >>> -venv-dir\Scripts\activate
-###### >>> pip install -r requirements.txt
-###### Create in my_site/ directory the folder with name "databases"
-###### >>> cd my_site
-###### >>> python manage.py migrate
-###### >>> python manage.py loaddata data.json
-###### >>> python manage.py runserver
-###### Now you can go to on one of urls:
-###### http://127.0.0.1:8000/book/
-###### http://127.0.0.1:8000/author/
-###### http://127.0.0.1:8000/friend/
-###### http://127.0.0.1:8000/publisher/
+* `>>> git clon -rep-`
+* `>>> cd rep/path`
+* `>>> python -m venv -dir-`
+* `>>> -venv-dir\Scripts\activate`
+* `>>> pip install -r requirements.txt`
+* Create in my_site/ directory the folder with name "databases"
+* `>>> cd my_site`
+* `>>> python manage.py migrate`
+* `>>> python manage.py loaddata data.json`
+* `>>> python manage.py runserver`
+* Now you can go to on one of urls:
+  * http://127.0.0.1:8000/book/
+  * http://127.0.0.1:8000/author/
+  * http://127.0.0.1:8000/friend/
+  * http://127.0.0.1:8000/publisher/
