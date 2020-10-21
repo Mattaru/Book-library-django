@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="fluid-container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/book/">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/author/">Autors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/friend/">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/publisher/">Publishers</a>
+            </li>
+            <li class="nav-item add-btn">
+                <a class="nav-link" href="/author/create/">add author</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/author/create_many/">add couple authors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="/author_book/create_many/">add authors & books</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="support-container">
+            <p>Are you shure want to delete this author?</p>
+            <div style="display: flex; margin: 0 20px">
+                <form method="POST" style="margin: 20px 10px">
+                    {% csrf_token %}
+                    <input class="btn" type="submit" value="Yes">
+                </form>
+                <form action="../" style="margin: 20px 10px">
+                    <input class="btn" type="submit" value="No">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

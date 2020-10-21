@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="fluid-container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/book/">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/author/">Autors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/friend/">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/publisher/">Publishers</a>
+            </li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="support-container">
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form }}
+                </table>
+                <p>
+                    <input class="btn support-distance" type="submit" value="Save">
+                </p>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="fluid-container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/book/">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/author/">Autors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/friend/">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/publisher/">Publishers</a>
+            </li>
+            <li class="nav-item add-btn">
+                <a class="nav-link" href="/author/create/">add author</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/author/create_many/">add couple authors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="/author_book/create_many/">add authors & books</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="support-container">
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form }}
+                </table>
+                <p>
+                    <input class="btn support-distance" type="submit" value="Edit">
+                </p>
+            </form>
+            <p class="support-delete">If you wont to delete the author click her: <a class="delete-link" href="delete/">delete</a></p>
+        </div>
+    </div>
+{% endblock%}

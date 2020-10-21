@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="fluid-container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/book/">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  active" href="/author/">Autors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/friend/">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/publisher/">Publishers</a>
+            </li>
+            <li class="nav-item add-btn">
+                <a class="nav-link" href="/author/create/">add author</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/author/create_many/">add couple authors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/author_book/create_many/">add authors & books</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="support-container">
+            <form enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                {{ author_formset.management_form }}
+                {% for form in author_formset %}
+                    <h3>{{ forloop.counter }} author.</h3>
+                    <br>
+                    <table>{{ form }}</table>
+                    <br>
+                    {% endfor %}
+                {{ book_formset.management_form }}
+                    {% for form in book_formset %}
+                    <h3>{{ forloop.counter }} book.</h3>
+                    <br>
+                    <table>{{ form }}</table>
+                    <br>
+                    {% endfor %}
+                <input class="btn support-distance" type="submit" value="Save"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}
