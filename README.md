@@ -12,6 +12,7 @@
 1. Импортируйте в базу уже подготовленные данные, в виде json, командой `>>> python manage.py loaddata data.json `
 1. Сервер полностью готов к работе, запустите его командой `>>> python manage.py runserver`
 #### После всего проделанного, можете открыть браузер и обраться по любому из указанных url:
+###### http://127.0.0.1:8000/
 ###### http://127.0.0.1:8000/book/
 ###### http://127.0.0.1:8000/author/
 ###### http://127.0.0.1:8000/friend/
@@ -36,6 +37,7 @@
 * `>>> python manage.py loaddata data.json`
 * `>>> python manage.py runserver`
 * Now you can go to on one of urls:
+  * http://127.0.0.1:8000/
   * http://127.0.0.1:8000/book/
   * http://127.0.0.1:8000/author/
   * http://127.0.0.1:8000/friend/
