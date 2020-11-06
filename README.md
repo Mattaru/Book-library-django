@@ -32,7 +32,7 @@
 * `>>> python -m venv -dir-`
 * `>>> -venv-dir\Scripts\activate`
 * `>>> pip install -r requirements.txt`
-* Create in my_site/ directory the folder with name "databases" if folder not exist
+* Create in my_site/ directory the folder with name "databases" if folder is not exist
 * `>>> cd my_site`
 * `>>> python manage.py migrate`
 * `>>> python manage.py loaddata data.json`
