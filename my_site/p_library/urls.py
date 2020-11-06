@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from .views import (
+        HomePage,
         BookList,
         BookCreate,
         BookUpdate,
@@ -28,6 +29,8 @@ from .views import (
 app_name = 'p_library'
 
 urlpatterns = [
+        path('', HomePage.as_view(), name='home'),
+
         path('book/create/', BookCreate.as_view(), name='book_create'),
         path('book/', BookList.as_view(), name='book_list'),
         path('book/<int:pk>/', BookUpdate.as_view(), name='book_edit'),

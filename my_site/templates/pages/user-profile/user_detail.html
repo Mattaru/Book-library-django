@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+
+{% block users-box %}
+    {% if user.username %}
+        <div class="user-box">
+            <a class="user-link" href="{% url 'accounts:logout' %}">logout</a>
+            <p>|</p>
+            <a class="user-link user-name" href="/user/{{ user.id }}/">{{ user.username }}</a>
+        </div>
+    {% else %}
+        <div class="user-box">
+            <a class="user-link" href="{% url 'accounts:registration' %}">registration</a>
+            <p>  |  </p>
+            <a class="user-link" href="{% url 'accounts:login' %}">login</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block top-nav %}
+    <div class="fluid-container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'p_library:home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:book_list' %}">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:author_list' %}">Autors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:friend_list' %}">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:publisher_list' %}">Publishers</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container detail-container">
+        <div class="row support-container">
+            <div class="col-4 detail-img-container">
+                {% if object.profile.avatar %}
+                    <img class="detail-img" src="{{ object.profile.avatar.url }}" alt="{{ object.username }} img">
+                {% else %}
+                    <img class="detail-img"  src="/static/assets/unknown.png" alt="img not define">
+                {% endif %}
+            </div>
+            <div class="col-8">
+                <h2>{{ object.username }}</h2>
+                <br>
+                <br>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th scope="row">User:</th>
+                        <td>{{ object.username }}</td>
+
+                    </tr>
+                    <tr>
+                        {% if object.email %}
+                            <th scope="row">Email:</th>
+                            <td>{{ object.email }}</td>
+                        {% else %}
+                            <th scope="row">Email:</th>
+                            <td></td>
+                        {% endif %}
+                    </tr>
+                    {% if object.profile %}
+                        <tr>
+                            <th scope="row">First name:</th>
+                            <td>{{ object.profile.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Last name:</th>
+                            <td>{{ object.profile.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Age:</th>
+                            <td>{{ object.profile.age}}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <th scope="row">First name:</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Last name:</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Age:</th>
+                            <td></td>
+                        </tr>
+                    {% endif %}
+                    {% if github_url %}
+                        <tr>
+                            <th scope="row">Github:</th>
+                            <td><a href="{{ github_url }}">{{ github_url }}</a></td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

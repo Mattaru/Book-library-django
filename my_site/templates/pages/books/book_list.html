@@ -1,29 +1,55 @@
 {% extends 'base.html' %}
 
-{% block content %}
+
+{% block users-box %}
+    {% if user.username %}
+        <div class="user-box">
+            <a class="user-link" href="{% url 'accounts:logout' %}">logout</a>
+            <p>|</p>
+            <a class="user-link user-name" href="/user/{{ user.id }}/">{{ user.username }}</a>
+        </div>
+    {% else %}
+        <div class="user-box">
+            <a class="user-link" href="{% url 'accounts:registration' %}">registration</a>
+            <p>  |  </p>
+            <a class="user-link" href="{% url 'accounts:login' %}">login</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block top-nav %}
     <div class="fluid-conteiner">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="/book/">Books</a>
+                <a class="nav-link" href="{% url 'p_library:home' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/author/">Autors</a>
+                <a class="nav-link active" href="{% url 'p_library:book_list' %}">Books</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/friend/">Friends</a>
+                <a class="nav-link" href="{% url 'p_library:author_list' %}">Authors</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/publisher/">Publishers</a>
-            </li>
-            <li class="nav-item add-btn">
-                <a class="nav-link" href="/book/create/">add book</a>
+                <a class="nav-link" href="{% url 'p_library:friend_list' %}">Friends</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="/author_book/create_many/">add authors & books</a>
+                <a class="nav-link" href="{% url 'p_library:publisher_list' %}">Publishers</a>
             </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item add-btn">
+                    <a class="nav-link" href="{% url 'p_library:book_create' %}">add book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="{% url 'p_library:author_book_create_many' %}">add authors & books</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
+{% endblock %}
 
+
+{% block content %}
     <div class="container">
         <table class="table" style="margin-top: 5px">
             <thead class="table-head">
@@ -46,7 +72,13 @@
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><img src="{{ book.book_img.url }}" alt="{{ book.title }}"></td>
                     <td>
-                        <h6><a href="{{ book.id }}/">{{ book.title }}</a></h6>
+                        <h6>
+                            {% if user.is_authenticated %}
+                                <a href="{{ book.id }}/">{{ book.title }}</a>
+                            {% else %}
+                                <a href="#">{{ book.title }}</a>
+                            {% endif %}
+                        </h6>
                         <p><small>({{ book.ISBN }})</small></p>
                     </td>
                     <td>{{ book.description }}</td>
@@ -56,16 +88,18 @@
                     <td>{{ book.reader.full_name }}</td>
                     <td>{{ book.copy_count }}</td>
                     <td style="text-align: center">
-                        <form action="book_increment/" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <input type="hidden" name="id" value="{{ book.id }}">
-                            <input class="btn" type="submit" value="+">
-                        </form>
-                        <form action="book_decrement/" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <input type="hidden" name="id" value="{{ book.id }}">
-                            <input class="btn btn-low" type="submit" value="-">
-                        </form>
+                        {% if user.is_authenticated %}
+                            <form action="book_increment/" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ book.id }}">
+                                <input class="btn" type="submit" value="+">
+                            </form>
+                            <form action="book_decrement/" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ book.id }}">
+                                <input class="btn btn-low" type="submit" value="-">
+                            </form>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

@@ -2,6 +2,7 @@
 env
 .idea
 .vscode
+my_site/databases/db.sqlite3
 my_site/my_site/__pycache__
 my_site/p_library/__pycache__
 my_site/p_library/migrations/__pycache__

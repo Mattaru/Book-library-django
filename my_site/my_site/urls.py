@@ -20,7 +20,12 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('', include('p_library.urls')),
     path('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+    path('accounts/', include('allauth.urls')),
+
+    path('', include('accounts.urls', namespace='accounts')),
+    path('', include('p_library.urls', namespace='p_library')),
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -14,11 +14,15 @@
 <body>
     <div class="fluid-container fon-container">
 
+        {% block users-box %} {% endblock %}
+
         <div class="header-container">
+
             <p>Welcome to</p>
             <h1>My library</h1>
         </div>
 
+        {% block top-nav %} {% endblock %}
         {% block content %} {% endblock %}
 
         <div class="footer-container">

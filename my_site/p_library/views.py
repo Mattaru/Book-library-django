@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic.base import TemplateView
 from django.urls import reverse_lazy
 from django.forms import formset_factory
 
 from p_library.models import Book, Publisher, Author, Friend
 from p_library.forms import AuthorForm, BookForm, FriendForm, PublisherForm
+
+
+class HomePage(TemplateView):
+    template_name = 'pages/home/home.html'
 
 
 class AuthorCreate(CreateView):
@@ -70,7 +75,6 @@ class BookCreate(CreateView):
     success_url = reverse_lazy('p_library:book_list')
 
 
-
 class BookList(ListView):
     model = Book
     context_object_name = 'books'
@@ -90,7 +94,6 @@ class BookDelete(DeleteView):
     form_class = BookForm
     success_url = reverse_lazy('p_library:book_list')
     template_name = 'pages/books/book_delete.html'
-
 
 
 class PublisherCreate(CreateView):

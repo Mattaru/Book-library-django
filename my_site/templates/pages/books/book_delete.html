@@ -1,41 +1,67 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="fluid-container">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" href="/book/">Books</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/author/">Autors</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/friend/">Friends</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/publisher/">Publishers</a>
-        </li>
-        <li class="nav-item add-btn">
-            <a class="nav-link" href="/book/create/">add book</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="/author_book/create_many/">add authors & books</a>
-        </li>
-    </ul>
-</div>
 
-<div class="container">
-    <div class="support-container">
-        <p>Are you shure want to delete this book?</p>
-        <div style="display: flex; margin-left: 20px">
-            <form method="POST" style="margin: 20px 10px">
-                {% csrf_token %}
-                <input class="btn" type="submit" value="Yes">
-            </form>
-            <form action="../" style="margin: 20px 10px">
-                <input class="btn" type="submit" value="No">
-            </form>
+{% block users-box %}
+    {% if user.username %}
+        <div class="user-box">
+            <a class="user-link" href="{% url 'accounts:logout' %}">logout</a>
+            <p>|</p>
+            <a class="user-link user-name" href="/user/{{ user.id }}/">{{ user.username }}</a>
+        </div>
+    {% else %}
+        <div class="user-box">
+            <a class="user-link" href="{% url 'accounts:registration' %}">registration</a>
+            <p>  |  </p>
+            <a class="user-link" href="{% url 'accounts:login' %}">login</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block top-nav %}
+    <div class="fluid-container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'p_library:book_list' %}">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:author_list' %}">Authors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:friend_list' %}">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'p_library:publisher_list' %}">Publishers</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item add-btn">
+                    <a class="nav-link" href="{% url 'p_library:book_create' %}">add book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="{% url 'p_library:author_book_create_many' %}">add authors & books</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="support-container">
+            <p>Are you shure want to delete this book?</p>
+            <div style="display: flex; margin-left: 20px">
+                <form method="POST" style="margin: 20px 10px">
+                    {% csrf_token %}
+                    <input class="btn" type="submit" value="Yes">
+                </form>
+                <form action="../" style="margin: 20px 10px">
+                    <input class="btn" type="submit" value="No">
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
