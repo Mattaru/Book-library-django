@@ -47,6 +47,8 @@
             <div class="col-4 detail-img-container">
                 {% if object.profile.avatar %}
                     <img class="detail-img" src="{{ object.profile.avatar.url }}" alt="{{ object.username }} img">
+                {% elif extra_data %}
+                    <img class="detail-img" src="{{ extra_data.avatar_url }}" alt="{{ object.username }} img">
                 {% else %}
                     <img class="detail-img"  src="/static/assets/unknown.png" alt="img not define">
                 {% endif %}
@@ -57,55 +59,72 @@
                 <br>
                 <table class="table table-striped">
                     <tbody>
-                    <tr>
-                        <th scope="row">User:</th>
-                        <td>{{ object.username }}</td>
-
-                    </tr>
-                    <tr>
-                        {% if object.email %}
-                            <th scope="row">Email:</th>
-                            <td>{{ object.email }}</td>
+                        <tr>
+                            <th scope="row">User:</th>
+                            <td>{{ object.username }}</td>
+                        </tr>
+                        <tr>
+                            {% if object.email %}
+                                <th scope="row">Email:</th>
+                                <td>{{ object.email }}</td>
+                            {% else %}
+                                <th scope="row">Email:</th>
+                                <td></td>
+                            {% endif %}
+                        </tr>
+                        {% if object.profile %}
+                            <tr>
+                                <th scope="row">First name:</th>
+                                <td>{{ object.profile.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Last name:</th>
+                                <td>{{ object.profile.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Age:</th>
+                                <td>{{ object.profile.age}}</td>
+                            </tr>
                         {% else %}
-                            <th scope="row">Email:</th>
-                            <td></td>
+                            <tr>
+                                <th scope="row">First name:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Last name:</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Age:</th>
+                                <td></td>
+                            </tr>
                         {% endif %}
-                    </tr>
-                    {% if object.profile %}
-                        <tr>
-                            <th scope="row">First name:</th>
-                            <td>{{ object.profile.first_name }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Last name:</th>
-                            <td>{{ object.profile.last_name }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Age:</th>
-                            <td>{{ object.profile.age}}</td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <th scope="row">First name:</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Last name:</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Age:</th>
-                            <td></td>
-                        </tr>
-                    {% endif %}
-                    {% if github_url %}
-                        <tr>
-                            <th scope="row">Github:</th>
-                            <td><a href="{{ github_url }}">{{ github_url }}</a></td>
-                        </tr>
-                    {% endif %}
                     </tbody>
                 </table>
+                {% if extra_data %}
+                <br>
+                <h4>GitHub profile:</h4>
+                <br>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Github:</th>
+                            <td><a href="{{ extra_data.html_url }}">{{ extra_data.html_url }}</a></td>
+                        </tr>
+                        {% for key,value in extra_data.items %}
+                            {% if value != None and value != '' %}
+                                <tr>
+                                    <th scope="row">{{ key }}:</th>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+                <div class="support-distance">
+                    <a class="btn" href="{% url 'accounts:user_update' %}">edit profile</a>
+                </div>
             </div>
         </div>
     </div>
